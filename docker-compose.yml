@@ -1,5 +1,11 @@
 version: '2'
 services:
+  nginx:
+    image: easyac/nginx
+    ports:
+      - 80:80
+    links:
+      - api:api
   api:
     restart: always
     image: easyac/api
