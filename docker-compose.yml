@@ -13,6 +13,7 @@ services:
       - NODE_ENV=production
       - PORT=3000
       - MONGO_URL=mongodb://mongo/easyac
+      - JWT_SECRET="[YteUqD8?HAG{PCkLjYwms3ura[@aJy,@9)wt=x"
   mongo:
     image: mongo
     volumes:
