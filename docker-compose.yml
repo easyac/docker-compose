@@ -1,5 +1,9 @@
 version: '2'
 services:
+  apidocs:
+    image: easyac/apidocs
+    ports:
+      - 8080:8080
   nginx:
     image: easyac/nginx
     ports:
