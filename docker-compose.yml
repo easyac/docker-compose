@@ -4,8 +4,13 @@ services:
     image: easyac/nginx
     ports:
       - 80:80
+      - 443:443
     links:
       - api:api
+    volumes:
+      - "/etc/letsencrypt/archive:/archive"
+      - "/etc/letsencrypt/live/api.easyac.xyz-0001:/ssl/api.easyac.xyz"
+      - "/etc/letsencrypt/live/easyac.xyz:/ssl/easyac.xyz"
   api:
     restart: always
     image: easyac/api
