@@ -10,6 +10,7 @@ services:
     volumes:
       - "/etc/letsencrypt/archive:/archive"
       - "/etc/letsencrypt/live/api.easyac.xyz-0001:/ssl/api.easyac.xyz"
+      - "/etc/letsencrypt/live/docs.easyac.xyz/:/ssl/docs.easyac.xyz"
       - "/etc/letsencrypt/live/easyac.xyz:/ssl/easyac.xyz"
   api:
     restart: always
