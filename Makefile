@@ -6,7 +6,7 @@ start:
 	&& docker-compose up -d
 
 start-local:
-		docker-compose stop && docker-compose rm --all -f \
+		docker-compose stop && docker-compose rm -f \
 		&& docker-compose --file docker-compose.dev.yml up -d \
 		&& docker-compose logs -f
 

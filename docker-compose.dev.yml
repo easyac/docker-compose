@@ -10,7 +10,8 @@ services:
     restart: always
     image: easyac/api
     volumes:
-      - "~/dev/easyac/easyac-api:/app"
+      - "~/dev/easyac/api:/app"
+      - "/app/node_modules"
     depends_on:
       - mongo
       - redis
@@ -21,26 +22,27 @@ services:
       - 3000:3000
     environment:
       - NODE_ENV=development
-      - DEBUG=worker
+      - DEBUG=api
       - PORT=3000
       - MONGO_URL=mongodb://mongo/easyac
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - JWT_SECRET="[YteUqD8?HAG{PCkLjYwms3ura[@aJy,@9)wt=x"
-  # worker:
-  #   restart: always
-  #   image: easyac/worker
-  #   depends_on:
-  #     - redis
-  #   links:
-  #     - redis:redis
-  #   volumes:
-  #     - "~/dev/easyac/easyac-workers:/app"
-  #   environment:
-  #     - NODE_ENV=development
-  #     - DEBUG=worker
-  #     - REDIS_HOST=redis
-  #     - REDIS_PORT=6379
+  worker:
+    restart: always
+    image: easyac/worker
+    depends_on:
+      - redis
+    links:
+      - redis:redis
+    volumes:
+      - "~/dev/easyac/workers:/app"
+      - "/app/node_modules"
+    environment:
+      - NODE_ENV=development
+      - DEBUG=worker
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
   mongo:
     image: mongo
     volumes:
