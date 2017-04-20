@@ -1,22 +1,17 @@
 version: '2'
 services:
   nginx:
-    image: easyac/nginx
+    image: easyac/nginx:dev
     ports:
       - 8080:80
-      - 443:443
     links:
       - api:api
-    volumes:
-      - "/etc/letsencrypt/archive:/archive"
-      - "/etc/letsencrypt/live/api.easyac.xyz-0001:/ssl/api.easyac.xyz"
-      - "/etc/letsencrypt/live/docs.easyac.xyz/:/ssl/docs.easyac.xyz"
-      - "/etc/letsencrypt/live/easyac.xyz:/ssl/easyac.xyz"
   api:
     restart: always
     image: easyac/api
     volumes:
-      - "/home/icaro/dev/easyac/easyac-api:/app"
+      - "~/dev/easyac/api:/app"
+      - "/app/node_modules"
     depends_on:
       - mongo
       - redis
@@ -26,7 +21,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
+      - DEBUG=api
       - PORT=3000
       - MONGO_URL=mongodb://mongo/easyac
       - REDIS_HOST=redis
@@ -39,8 +35,12 @@ services:
       - redis
     links:
       - redis:redis
+    volumes:
+      - "~/dev/easyac/workers:/app"
+      - "/app/node_modules"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
+      - DEBUG=worker
       - REDIS_HOST=redis
       - REDIS_PORT=6379
   mongo:
@@ -51,7 +51,5 @@ services:
       - 27017:27017
   redis:
     image: redis
-    volumes:
-      - "./.data/db:/data/db"
     ports:
       - 6379:6379
