@@ -2,7 +2,7 @@ start:
 	docker-compose stop && docker-compose rm -f \
 	&& docker pull easyac/nginx \
 	&& docker pull easyac/api \
-	&& docker pull easyac/worker \
+	&& docker pull easyac/workers \
 	&& docker-compose up -d
 
 start-local:

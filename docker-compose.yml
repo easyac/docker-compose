@@ -32,7 +32,7 @@ services:
       - JWT_SECRET=${JWT_SECRET}
   worker:
     restart: always
-    image: easyac/worker
+    image: easyac/workers
     depends_on:
       - redis
     links:
