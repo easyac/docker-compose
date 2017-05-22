@@ -41,6 +41,7 @@ services:
       - NODE_ENV=${NODE_ENV}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
+      - FGM_KEY=${FGM_KEY}
   mongo:
     image: mongo
     volumes:
