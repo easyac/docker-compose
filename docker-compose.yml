@@ -24,6 +24,7 @@ services:
     ports:
       - 3000:3000
     environment:
+      - DEBUG=api
       - NODE_ENV=${NODE_ENV}
       - PORT=3000
       - MONGO_URL=${MONGO_URL}
@@ -38,6 +39,7 @@ services:
     links:
       - redis:redis
     environment:
+      - DEBUG=worker
       - NODE_ENV=${NODE_ENV}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}

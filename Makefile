@@ -15,3 +15,6 @@ stop:
 
 logs:
 	docker-compose logs -f
+
+query_mongo:
+	docker exec -it compose_mongo_1 mongo easyac
