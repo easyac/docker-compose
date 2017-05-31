@@ -16,10 +16,8 @@ services:
     restart: always
     image: easyac/api
     depends_on:
-      - mongo
       - redis
     links:
-      - mongo:mongo
       - redis:redis
     ports:
       - 3000:3000
@@ -44,12 +42,6 @@ services:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_PORT=${REDIS_PORT}
       - FGM_KEY=${FGM_KEY}
-  mongo:
-    image: mongo
-    volumes:
-      - "./.data/db:/data/db"
-    ports:
-      - 27017:27017
   redis:
     image: redis
     ports:
